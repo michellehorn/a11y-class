@@ -1,7 +1,14 @@
+import { useEffect, useState } from "react";
 import a11yChecker from "a11y-checker";
+import img from "../assets/baby_yoda.jpeg";
+import "./home.css";
 
 function Home() {
-  a11yChecker();
+  const [isDialogOpen, toggleDialog] = useState(false);
+
+  useEffect(() => {
+    a11yChecker();
+  }, []);
 
   return (
     <div data-role="page">
@@ -20,14 +27,29 @@ function Home() {
           including versions of Lorem Ipsum
         </p>
       </section>
-      <details>
-        <summary>Titulo de área colapsavel 1</summary>
-        <p> Texto de área colapsavel 1</p>
-      </details>
-      <details>
-        <summary>Titulo de área colapsavel 2</summary>
-        <p> Texto de área colapsavel 2</p>
-      </details>
+      <section>
+        <details>
+          <summary>Titulo de área colapsavel 1</summary>
+          <p> Texto de área colapsavel 1</p>
+        </details>
+        <details>
+          <summary>Titulo de área colapsavel 2</summary>
+          <p> Texto de área colapsavel 2</p>
+        </details>
+      </section>
+      <section>
+        <button title="Fechar modal" onClick={() => toggleDialog(true)}>
+          Abrir janela modal
+        </button>
+        <dialog open={isDialogOpen} className="dialog">
+          Modal
+          <button onClick={() => toggleDialog(false)}>x</button>
+        </dialog>
+      </section>
+      <section>
+        <img src={img} alt="Grogu sendo a coisa mais fofa desse mundo todo" />
+      </section>
+      <a href="https://github.com">Clique para abrir o github!</a>
     </div>
   );
 }

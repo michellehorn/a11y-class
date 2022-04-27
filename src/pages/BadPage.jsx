@@ -1,6 +1,17 @@
+import { useEffect, useState } from "react";
+import a11yChecker from "a11y-checker";
+import img from "../assets/baby_yoda.jpeg";
+
 function BadPage() {
+  const [isDialogOpen, toggleDialog] = useState(false);
+  const [isCollapseOpen, toggleCollapse] = useState(false);
+
+  useEffect(() => {
+    a11yChecker();
+  }, []);
+
   return (
-    <div data-role="page">
+    <div>
       <h1>Título de página</h1>
       <h1>Título de página</h1>
       <div>
@@ -18,9 +29,24 @@ function BadPage() {
         </p>
       </div>
       <div>
-        <div>Titulo de área colapsavel 1</div>
-        <p> Texto de área colapsavel 1</p>
+        <div onClick={() => toggleCollapse(!isCollapseOpen)}>
+          Titulo de área colapsavel 1
+        </div>
+        {isCollapseOpen && <p> Texto de área colapsavel 1</p>}
       </div>
+      <div>
+        <button onClick={() => toggleDialog(true)}>Abrir janela modal</button>
+        {isDialogOpen && (
+          <div>
+            Modal
+            <button onClick={() => toggleDialog(false)}>x</button>
+          </div>
+        )}
+      </div>
+      <img src={img} />
+      <p>
+        <a href="https://github.com">Clique aqui!</a>
+      </p>
     </div>
   );
 }
